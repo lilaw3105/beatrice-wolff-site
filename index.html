@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Béatrice Wolff — Artiste peintre</title>
-<meta name="description" content="Site de Béatrice Wolff, artiste peintre : l'art comme territoire sensible. Encre de chine, collages, papiers japonais. Galerie et contact." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+<meta name="description" content="Site de Béatrice Wolff, artiste peintre : l'art comme territoire sensible. Encre de chine, collages, papiers japonais. Expositions, œuvres et contact." />
 <style>
   /* ============================================================
      PERSONNALISEZ LE SITE ICI
@@ -16,11 +15,11 @@
     --fond-doux: #f7f6f3;       /* fonds légèrement teintés */
     --texte: #181614;           /* texte principal */
     --texte-doux: #6f6b64;      /* texte secondaire */
-    --rose: #ff3e78;            /* accent rose vif */
-    --orange: #ff7a1a;          /* accent orange vif */
-    --bleu: #1f6bff;            /* accent bleu vif */
+    --rose: #ff2ea6;             /* rose fluo */
+    --vert: #00e66a;             /* vert fluo (boutons au clic) */
+    --noir: #181614;              /* boutons sobres */
     --bordure: #ececea;
-    --police-titres: 'Georgia', 'Times New Roman', serif;
+    --police-titres: Georgia, 'Times New Roman', serif;
     --police-texte: system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
 
@@ -42,15 +41,9 @@
   a:hover { text-decoration: underline; }
   code { background: var(--fond-doux); padding: 1px 6px; border-radius: 4px; font-size: 0.85em; }
 
-  /* ---------- Petites pastilles colorées décoratives ---------- */
-  .pastille { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
-  .p-rose { background: var(--rose); }
-  .p-orange { background: var(--orange); }
-  .p-bleu { background: var(--bleu); }
-
-  /* ---------- En-tête flottant ---------- */
+  /* ---------- En-tête ---------- */
   header {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -74,11 +67,9 @@
     font-size: 1.45rem;
     letter-spacing: 1px;
     color: var(--texte);
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
   .nom-artiste:hover { text-decoration: none; }
+  .nom-artiste .vif { color: var(--rose); }
 
   nav ul { display: flex; gap: 8px; list-style: none; flex-wrap: wrap; }
 
@@ -90,8 +81,9 @@
     border-radius: 20px;
     transition: background 0.2s, color 0.2s;
   }
-  nav a:hover { background: var(--fond-doux); color: var(--texte); text-decoration: none; }
-  nav a.actif { background: var(--texte); color: #fff; }
+  nav a:hover { background: var(--vert); color: var(--texte); text-decoration: none; }
+  nav a.actif { background: var(--noir); color: #fff; }
+  nav a.actif:hover { background: var(--vert); color: var(--texte); }
 
   /* ---------- Pages ---------- */
   main { flex: 1; }
@@ -109,16 +101,43 @@
   h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); margin-bottom: 18px; }
 
   .vif { color: var(--rose); }
-  .vif-orange { color: var(--orange); }
-  .vif-bleu { color: var(--bleu); }
+  .vif-orange { color: var(--rose); }
 
   .sous-titre { color: var(--texte-doux); font-size: 1.1rem; max-width: 620px; margin-bottom: 36px; }
 
-  /* Filigrane coloré en haut de chaque page */
   .filet {
     width: 72px; height: 4px; border-radius: 4px; margin-bottom: 30px;
-    background: linear-gradient(90deg, var(--rose), var(--orange), var(--bleu));
+    background: var(--rose);
   }
+
+  /* ---------- Boutons : noirs, verts au clic / survol ---------- */
+  .bouton {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 14px 34px;
+    border-radius: 30px;
+    color: #fff;
+    background: var(--noir);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .bouton:hover, .bouton:active {
+    background: var(--vert);
+    transform: translateY(-3px);
+    text-decoration: none;
+    color: var(--texte);
+    box-shadow: 0 10px 26px rgba(0, 230, 106, 0.45);
+  }
+  .bouton.contour {
+    background: transparent; color: var(--noir); border: 1.5px solid var(--noir);
+  }
+  .bouton.contour:hover, .bouton.contour:active { background: var(--vert); border-color: var(--vert); color: var(--texte); }
+  .boutons-flex { display: flex; gap: 14px; flex-wrap: wrap; }
 
   /* ---------- Accueil ---------- */
   .accueil-grille {
@@ -136,81 +155,105 @@
   }
   .accueil-oeuvre .deco {
     position: absolute; inset: 0;
-    background:
-      radial-gradient(circle at 25% 25%, rgba(255, 62, 120, 0.85), transparent 45%),
-      radial-gradient(circle at 78% 35%, rgba(255, 122, 26, 0.85), transparent 45%),
-      radial-gradient(circle at 50% 80%, rgba(31, 107, 255, 0.85), transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(255, 62, 120, 0.6), transparent 40%),
-      #f7f6f3;
+    background-color: var(--rose);
+    opacity: 0.15;
     animation: pulsation 9s ease-in-out infinite alternate;
   }
   @keyframes pulsation {
-    from { filter: saturate(1); transform: scale(1); }
-    to   { filter: saturate(1.35); transform: scale(1.06); }
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
   }
   .accueil-oeuvre img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
   .accueil-oeuvre .legende {
-    position: relative; z-index: 2;
+    position: relative; z-index: 3;
     background: rgba(255, 255, 255, 0.92);
     margin: 18px; padding: 10px 20px;
     border-radius: 20px;
     font-size: 0.85rem; color: var(--texte-doux);
   }
-  .formes-atomiques { position: absolute; z-index: 1; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .formes-atomiques span { font-family: var(--police-titres); color: rgba(24, 22, 20, 0.55); font-size: 1.05rem; background: #fff; padding: 10px 22px; border-radius: 30px; }
-  .pastille-formes { position: absolute; border-radius: 50%; z-index: 2; }
+  .formes-atomiques { position: absolute; z-index: 2; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .formes-atomiques span { font-family: var(--police-titres); color: var(--texte); font-size: 1.05rem; background: #fff; padding: 10px 22px; border-radius: 30px; }
 
-  .boutons-flex { display: flex; gap: 14px; flex-wrap: wrap; }
-  .bouton {
+  /* ---------- Expositions ---------- */
+  .expo-actuelle {
+    background: var(--fond-doux);
+    border: 1px solid var(--bordure);
+    border-left: 5px solid var(--rose);
+    border-radius: 14px;
+    padding: 30px 34px;
+    margin-bottom: 46px;
+  }
+  .badge-actuelle {
     display: inline-block;
-    margin-top: 10px;
-    padding: 14px 34px;
-    border-radius: 30px;
-    color: #fff;
     background: var(--rose);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 0.85rem;
+    color: #fff;
+    font-size: 0.75rem;
     font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 4px;
+    margin-bottom: 14px;
   }
-  .bouton:hover { transform: translateY(-3px); text-decoration: none; color: #fff; background: var(--orange); box-shadow: 0 10px 26px rgba(255, 122, 26, 0.35); }
-  .bouton.contour {
-    background: transparent; color: var(--texte); border: 1.5px solid var(--texte);
-  }
-  .bouton.contour:hover { background: var(--bleu); border-color: var(--bleu); color: #fff; box-shadow: 0 10px 26px rgba(31, 107, 255, 0.3); }
+  .expo-actuelle h3, .expo-passee h3 { font-family: var(--police-titres); font-weight: normal; font-size: 1.4rem; margin-bottom: 8px; }
+  .expo-date { color: var(--rose); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* ---------- Galerie : grille moderne avec décalage ---------- */
-  .galerie {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 30px;
-  }
-  .galerie .oeuvre:nth-child(4n+2) { transform: translateY(26px); }
-  .oeuvre {
+  .expos-passees { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  .expo-passee {
     background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 24px 28px;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .expo-passee:hover { transform: translateY(-4px); border-color: var(--vert); }
+  .expo-adresse { color: var(--texte-doux); font-size: 0.95rem; margin-top: 4px; }
+
+  /* ---------- Œuvres : un carrousel par série ---------- */
+  .serie { margin-bottom: 60px; }
+  .serie h3 { font-family: var(--police-titres); font-weight: normal; font-size: 1.5rem; margin-bottom: 4px; }
+  .serie .description-serie { color: var(--texte-doux); font-size: 0.95rem; margin-bottom: 20px; max-width: 640px; }
+
+  .carrousel {
+    position: relative;
+    background: var(--fond-doux);
+    border: 1px solid var(--bordure);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--bordure);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .oeuvre:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 44px rgba(24, 22, 20, 0.14); }
-  .oeuvre figure { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.9); font-size: 0.9rem; }
-  .oeuvre img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .oeuvre figcaption { padding: 16px 20px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .oeuvre .titre-oeuvre { font-family: var(--police-titres); font-size: 1.15rem; }
-  .oeuvre .details { color: var(--texte-doux); font-size: 0.83rem; }
-  .oeuvre .tag-prix { font-size: 0.8rem; color: var(--bleu); font-weight: 600; white-space: nowrap; }
+  .piste {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .diapo {
+    flex: 0 0 100%;
+    aspect-ratio: 16 / 10;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .diapo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .diapo .emplacement { text-align: center; color: #fff; font-size: 0.95rem; padding: 20px; }
+  .fond-rose { background-color: var(--rose); }
+  .fond-vert { background-color: var(--vert); color: var(--texte); }
+  .fond-noir { background-color: var(--noir); }
 
-  /* Dégradés vifs des emplacements d'œuvres (personnalisables librement) */
-  .couleur-1 { background: linear-gradient(135deg, #ff3e78, #ff7a1a); }
-  .couleur-2 { background: linear-gradient(135deg, #ff7a1a, #ffd300); }
-  .couleur-3 { background: linear-gradient(135deg, #1f6bff, #00c2d1); }
-  .couleur-4 { background: linear-gradient(135deg, #ff3e78, #b429f9); }
-  .couleur-5 { background: linear-gradient(135deg, #00c2d1, #1fdf64); }
-  .couleur-6 { background: linear-gradient(135deg, #b429f9, #ff3e78); }
+  .commandes-carrousel {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px; pointer-events: none;
+  }
+  .fleche {
+    pointer-events: auto;
+    width: 44px; height: 44px;
+    border-radius: 4px;
+    border: none;
+    background: var(--noir);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .fleche:hover, .fleche:active { background: var(--vert); color: var(--texte); transform: scale(1.08); }
 
   /* ---------- À propos ---------- */
   .apropos-grille { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 60px; align-items: start; }
@@ -224,11 +267,6 @@
     overflow: hidden;
   }
   .portrait img { width: 100%; height: 100%; object-fit: cover; }
-  .portrait::after {
-    content: ""; position: absolute; right: -16px; bottom: -16px;
-    width: 90px; height: 90px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--bleu), var(--rose)); z-index: -1;
-  }
   .apropos-texte p { margin-bottom: 18px; color: var(--texte-doux); font-size: 1.02rem; }
   .apropos-texte p.fort { color: var(--texte); font-size: 1.12rem; }
 
@@ -239,17 +277,14 @@
     padding: 28px 30px;
     margin: 30px 0 10px;
     border-radius: 16px;
+    border-left: 4px solid var(--rose);
     color: var(--texte);
-    background: linear-gradient(120deg, rgba(255, 62, 120, 0.08), rgba(31, 107, 255, 0.08));
+    background: var(--fond-doux);
   }
   .citation footer { border: none; padding: 0; margin-top: 10px; font-size: 0.85rem; color: var(--rose); font-family: var(--police-texte); text-align: left; }
 
   .liste-titres { list-style: none; margin: 10px 0 24px; }
-  .liste-titres li { padding-left: 24px; position: relative; color: var(--texte-doux); margin-bottom: 10px; }
-  .liste-titres li::before { content: "●"; position: absolute; left: 0; font-size: 0.7rem; top: 4px; }
-  .liste-titres li:nth-child(3n+1)::before { color: var(--rose); }
-  .liste-titres li:nth-child(3n+2)::before { color: var(--orange); }
-  .liste-titres li:nth-child(3n+3)::before { color: var(--bleu); }
+  .liste-titres li { color: var(--texte-doux); margin-bottom: 10px; }
   h3.rubrique { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--texte); margin: 30px 0 12px; }
 
   /* ---------- Contact ---------- */
@@ -268,11 +303,10 @@
   }
   input:focus, textarea:focus { outline: none; border-color: var(--rose); background: #fff; }
   button.bouton { margin-top: 6px; font-family: inherit; }
-  .message-envoye { color: var(--bleu); display: none; margin-top: 8px; font-weight: 500; }
+  .message-envoye { color: var(--rose); display: none; margin-top: 8px; font-weight: 500; }
 
   .coordonnees p { margin-bottom: 22px; color: var(--texte-doux); }
-  .coordonnées strong { color: var(--texte); }
-  .coordonnees strong { display: block; margin-bottom: 3px; font-size: 0.95rem; }
+  .coordonnees strong { display: block; margin-bottom: 3px; font-size: 0.95rem; color: var(--texte); }
 
   .cartes-plateformes { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
   .carte-plateforme {
@@ -280,14 +314,11 @@
     padding: 22px 24px;
     border-radius: 14px;
     border: 1px solid var(--bordure);
+    border-top: 4px solid var(--rose);
     transition: transform 0.25s, border-color 0.25s;
+    color: var(--texte);
   }
-  .carte-plateforme:hover { transform: translateY(-4px); }
-  .carte-plateforme.rose { border-top: 4px solid var(--rose); }
-  .carte-plateforme.orange { border-top: 4px solid var(--orange); }
-  .carte-plateforme.bleu { border-top: 4px solid var(--bleu); }
-  .carte-plateforme h4 { font-size: 1.05rem; margin-bottom: 6px; }
-  .carte-plateforme p { font-size: 0.88rem; color: var(--texte-doux); }
+  .carte-plateforme:hover { transform: translateY(-4px); border-top-color: var(--vert); text-decoration: none; }
 
   /* ---------- Pied de page ---------- */
   footer {
@@ -297,16 +328,11 @@
     font-size: 0.85rem;
     text-align: center;
   }
-  .footer-filet { width: 72px; height: 4px; border-radius: 4px; margin: 16px auto 0; background: linear-gradient(90deg, var(--rose), var(--orange), var(--bleu)); }
-
-  /* ---------- Apparition au défilement ---------- */
-  .a-apparaitre { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .a-apparaitre.visible-defilement { opacity: 1; transform: none; }
+  .footer-filet { width: 72px; height: 4px; border-radius: 4px; margin: 16px auto 0; background: var(--rose); }
 
   /* ---------- Mobile ---------- */
   @media (max-width: 860px) {
     .accueil-grille, .apropos-grille, .contact-grille { grid-template-columns: 1fr; gap: 40px; }
-    .galerie .oeuvre:nth-child(4n+2) { transform: none; }
     .page { padding: 44px 0 70px; }
   }
 </style>
@@ -315,16 +341,12 @@
 
 <header>
   <div class="conteneur barre-nav">
-    <a href="#accueil" class="nom-artiste lien-page">
-      <span>
-        <span class="pastille p-rose"></span><span class="pastille p-orange"></span><span class="pastille p-bleu"></span>
-      </span>
-      Béatrice Wolff
-    </a>
+    <a href="#accueil" class="nom-artiste lien-page">Béatrice <span class="vif">Wolff</span></a>
     <nav>
       <ul>
         <li><a href="#accueil" class="lien-page actif">Accueil</a></li>
-        <li><a href="#galerie" class="lien-page">Galerie</a></li>
+        <li><a href="#expositions" class="lien-page">Expositions</a></li>
+        <li><a href="#oeuvres" class="lien-page">Œuvres</a></li>
         <li><a href="#apropos" class="lien-page">À propos</a></li>
         <li><a href="#contact" class="lien-page">Contact</a></li>
       </ul>
@@ -339,124 +361,148 @@
     <div class="accueil-grille">
       <div>
         <p class="sous-titre" style="margin-bottom:14px; text-transform:uppercase; letter-spacing:3px; font-size:0.8rem; font-weight:600;">Artiste peintre — Paris</p>
-        <h1>L'art comme <span class="vif">territoire</span><br /><span class="vif-orange">sensible</span> et vivant.</h1>
+        <h1>L'art comme <span class="vif">territoire</span><br /><span class="vif">sensible</span> et vivant.</h1>
         <p class="sous-titre">Encre de chine, collage, papiers japonais : chaque création est une traversée, une mémoire recomposée, une émotion à l'état brut.</p>
         <div class="boutons-flex">
-          <a href="#galerie" class="bouton lien-page">Découvrir les œuvres</a>
-          <a href="#apropos" class="bouton contour lien-page">Son parcours</a>
+          <a href="#expositions" class="bouton lien-page">Expositions</a>
+          <a href="#oeuvres" class="bouton contour lien-page">Voir les œuvres</a>
         </div>
       </div>
       <div class="accueil-oeuvre">
-        <!-- Formes décoratives animées : elles seront recouvertes par votre image -->
         <div class="deco"></div>
-        <span class="pastille-formes" style="top:12%; left:10%; width:26px; height:26px; background:var(--rose);"></span>
-        <span class="pastille-formes" style="top:20%; right:14%; width:16px; height:16px; background:var(--bleu);"></span>
-        <span class="pastille-formes" style="bottom:28%; left:22%; width:14px; height:14px; background:var(--orange);"></span>
-        <div class="formes-atomiques" style="z-index:3;">
+        <div class="formes-atomiques">
           <span>Placez ici une œuvre (par ex. « Flower XV »)</span>
         </div>
-        <!-- Remplacez les deux blocs ci-dessus et décommentez pour votre image :
+        <!-- Remplacez les blocs ci-dessus et décommentez pour votre image :
              <img src="images/oeuvre-principale.jpg" alt="Flower XV — Béatrice Wolff" />
              <p class="legende">« Flower XV » — technique mixte, 24 × 30 cm</p> -->
-        <p class="legende" style="z-index:3;">Œuvre vedette</p>
+        <p class="legende">Œuvre vedette</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PAGE GALERIE ==================== -->
-  <section id="galerie" class="page">
+  <!-- ==================== PAGE EXPOSITIONS ==================== -->
+  <section id="expositions" class="page">
     <div class="filet"></div>
-    <h2>Galerie</h2>
-    <p class="sous-titre">Œuvres disponibles : Flower, série en technique mixte.
-    Pour ajouter une œuvre, copiez un bloc <code>&lt;div class="oeuvre"&gt;</code> puis remplacez
-    la <code>&lt;figure&gt;</code> par <code>&lt;img src="images/nom.jpg"&gt;</code>.</p>
+    <h2>Expositions</h2>
+    <p class="sous-titre">Où voir les œuvres de Béatrice Wolff, en ce moment et par le passé.</p>
 
-    <div class="galerie">
-      <!-- Titres et formats d'après le profil Saatchi Art de Béatrice Wolff.
-           Remplacez chaque figure dégradée par la photo de l'œuvre correspondante. -->
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-1">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower XV</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">499 €</span>
-        </figcaption>
+    <!-- ----- Exposition actuelle ----- -->
+    <div class="expo-actuelle">
+      <span class="badge-actuelle">En cours</span>
+      <h3>Nom de l'exposition actuelle</h3>
+      <p class="expo-date">Dates à indiquer (ex. 3 — 28 novembre 2026)</p>
+      <p class="expo-adresse">Galerie Choiseul, 40 rue de Paradis, 75010 Paris</p>
+      <p class="expo-adresse">Horaires : du mardi au samedi, 11h — 19h</p>
+    </div>
+
+    <!-- ----- Anciennes expositions (5) -----
+         Modifiez titres, dates et adresses directement dans le texte. -->
+    <h3 class="rubrique">Expositions passées</h3>
+    <div class="expos-passees">
+      <div class="expo-passee">
+        <h3>Titre de l'exposition 1</h3>
+        <p class="expo-date">Novembre 2025</p>
+        <p class="expo-adresse">Galerie Choiseul, 40 rue de Paradis, 75010 Paris</p>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-2">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower XIV</p><p class="details">Technique mixte — 19 × 28 cm</p></div>
-          <span class="tag-prix">465 €</span>
-        </figcaption>
+      <div class="expo-passee">
+        <h3>Titre de l'exposition 2</h3>
+        <p class="expo-date">Mois année</p>
+        <p class="expo-adresse">Nom de la galerie, adresse, ville</p>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-3">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower XIII</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">499 €</span>
-        </figcaption>
+      <div class="expo-passee">
+        <h3>Titre de l'exposition 3</h3>
+        <p class="expo-date">Mois année</p>
+        <p class="expo-adresse">Nom de la galerie, adresse, ville</p>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-4">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower XII</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">499 €</span>
-        </figcaption>
+      <div class="expo-passee">
+        <h3>Titre de l'exposition 4</h3>
+        <p class="expo-date">Mois année</p>
+        <p class="expo-adresse">Nom de la galerie, adresse, ville</p>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-5">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower XI</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">586 €</span>
-        </figcaption>
+      <div class="expo-passee">
+        <h3>Titre de l'exposition 5</h3>
+        <p class="expo-date">Mois année</p>
+        <p class="expo-adresse">Nom de la galerie, adresse, ville</p>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-6">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower X</p><p class="details">Technique mixte — 27 × 33 cm</p></div>
-          <span class="tag-prix">499 €</span>
-        </figcaption>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE ŒUVRES : 4 CARROUSELS PAR SÉRIE ==================== -->
+  <section id="oeuvres" class="page">
+    <div class="filet"></div>
+    <h2>Œuvres</h2>
+    <p class="sous-titre">Quatre séries, à découvrir image par image. Pour remplir un carrousel :
+    remplacez chaque bloc <code>&lt;div class="emplacement"&gt;</code> par
+    <code>&lt;img src="images/nom.jpg"&gt;</code> dans la <code>&lt;div class="diapo"&gt;</code> correspondante.
+    Copiez une <code>&lt;div class="diapo"&gt;</code> pour ajouter une œuvre à la série.</p>
+
+    <!-- ----- SÉRIE 1 ----- -->
+    <div class="serie">
+      <h3>Série <span class="vif">« Flower »</span></h3>
+      <p class="description-serie">Fleurs recomposées en collages : technique mixte, encre de chine et papiers japonais.</p>
+      <div class="carrousel" data-carrousel>
+        <div class="piste">
+          <div class="diapo"><div class="emplacement fond-rose">Flower I — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-vert">Flower V — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-noir">Flower XII — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-rose">Flower XV — photo à insérer</div></div>
+        </div>
+        <div class="commandes-carrousel">
+          <button class="fleche" data-precedent aria-label="Œuvre précédente">&#10094;</button>
+          <button class="fleche" data-suivant aria-label="Œuvre suivante">&#10095;</button>
+        </div>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-2">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower VIIII</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">464 €</span>
-        </figcaption>
+    </div>
+
+    <!-- ----- SÉRIE 2 ----- -->
+    <div class="serie">
+      <h3>Série <span class="vif">« Encre &amp; papier »</span></h3>
+      <p class="description-serie">Encre de chine et papiers déchirés : mémoire des paysages traversés.</p>
+      <div class="carrousel" data-carrousel>
+        <div class="piste">
+          <div class="diapo"><div class="emplacement fond-vert">Œuvre 1 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-noir">Œuvre 2 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-rose">Œuvre 3 — photo à insérer</div></div>
+        </div>
+        <div class="commandes-carrousel">
+          <button class="fleche" data-precedent aria-label="Œuvre précédente">&#10094;</button>
+          <button class="fleche" data-suivant aria-label="Œuvre suivante">&#10095;</button>
+        </div>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-4">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower VIII</p><p class="details">Technique mixte — 19 × 28 cm</p></div>
-          <span class="tag-prix">463 €</span>
-        </figcaption>
+    </div>
+
+    <!-- ----- SÉRIE 3 ----- -->
+    <div class="serie">
+      <h3>Série <span class="vif">« Souvenirs d'Australie »</span></h3>
+      <p class="description-serie">Signes et symboles de la culture aborigène, quatre années de souvenirs.</p>
+      <div class="carrousel" data-carrousel>
+        <div class="piste">
+          <div class="diapo"><div class="emplacement fond-noir">Œuvre 1 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-rose">Œuvre 2 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-vert">Œuvre 3 — photo à insérer</div></div>
+        </div>
+        <div class="commandes-carrousel">
+          <button class="fleche" data-precedent aria-label="Œuvre précédente">&#10094;</button>
+          <button class="fleche" data-suivant aria-label="Œuvre suivante">&#10095;</button>
+        </div>
       </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-1">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower VII</p><p class="details">Technique mixte — 19 × 28 cm</p></div>
-          <span class="tag-prix">475 €</span>
-        </figcaption>
-      </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-3">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower VI</p><p class="details">Technique mixte — 21 × 29 cm</p></div>
-          <span class="tag-prix">499 €</span>
-        </figcaption>
-      </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-5">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower V</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">497 €</span>
-        </figcaption>
-      </div>
-      <div class="oeuvre a-apparaitre">
-        <figure class="couleur-6">Photo de l'œuvre</figure>
-        <figcaption>
-          <div><p class="titre-oeuvre">Flower IV</p><p class="details">Technique mixte — 24 × 30 cm</p></div>
-          <span class="tag-prix">498 €</span>
-        </figcaption>
+    </div>
+
+    <!-- ----- SÉRIE 4 ----- -->
+    <div class="serie">
+      <h3>Série <span class="vif">« Couleurs du Venezuela »</span></h3>
+      <p class="description-serie">Couleurs sud-américaines, énergiques et fluorescentes.</p>
+      <div class="carrousel" data-carrousel>
+        <div class="piste">
+          <div class="diapo"><div class="emplacement fond-rose">Œuvre 1 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-vert">Œuvre 2 — photo à insérer</div></div>
+          <div class="diapo"><div class="emplacement fond-noir">Œuvre 3 — photo à insérer</div></div>
+        </div>
+        <div class="commandes-carrousel">
+          <button class="fleche" data-precedent aria-label="Œuvre précédente">&#10094;</button>
+          <button class="fleche" data-suivant aria-label="Œuvre suivante">&#10095;</button>
+        </div>
       </div>
     </div>
   </section>
@@ -480,10 +526,9 @@
         la communication, le marketing. Pendant des années, elle crée pour les autres, dans
         un cadre structuré, codifié. Mais en elle, quelque chose persiste : un besoin profond
         d'exprimer autrement, de revenir à l'essentiel, la main, le papier, le geste libre.</p>
-        <p>Ce sont les voyages, physiques et intérieurs, qui déclenchent le retour. Des
-        paysages traversés, des cultures effleurées, des carnets remplis de fragments.
-        Quatre ans en Australie, deux ans au Venezuela… L'art revient, comme une évidence,
-        mais transformé : il n'est plus décoratif, il devient langage. Elle s'ouvre alors à
+        <p>Ce sont les voyages, physiques et intérieurs, qui déclenchent le retour. Quatre ans
+        en Australie, deux ans au Venezuela… L'art revient, comme une évidence, mais
+        transformé : il n'est plus décoratif, il devient langage. Elle s'ouvre alors à
         l'encre de chine, au collage, aux papiers japonais. Elle mêle textures, accidents,
         superpositions. Son œuvre devient sensorielle, poétique, instinctive.</p>
         <p class="citation">« Mon œuvre devient sensorielle, poétique, instinctive. »
@@ -491,17 +536,17 @@
         </p>
 
         <h3 class="rubrique">Formation</h3>
-        <ul class="liste-titres">
-          <li>Beaux-Arts de Dunkerque</li>
-          <li>Ateliers de peinture et de sculpture à Paris</li>
-          <li>Atelier de nu et huile à Sydney</li>
-          <li>Atelier d'art abstrait et collages à Montpellier</li>
-        </ul>
+        <div class="liste-titres">
+          <p>Beaux-Arts de Dunkerque</p>
+          <p>Ateliers de peinture et de sculpture à Paris</p>
+          <p>Atelier de nu et huile à Sydney</p>
+          <p>Atelier d'art abstrait et collages à Montpellier</p>
+        </div>
 
         <h3 class="rubrique">Expositions</h3>
-        <ul class="liste-titres">
-          <li>Novembre 2025 : galerie Choiseul, Paris</li>
-        </ul>
+        <div class="liste-titres">
+          <p>Novembre 2025 : galerie Choiseul, Paris</p>
+        </div>
       </div>
     </div>
   </section>
@@ -537,17 +582,13 @@
         <p><strong>Réseaux</strong>Instagram, LinkedIn, etc.</p>
 
         <div class="cartes-plateformes">
-          <a class="carte-plateforme rose lien-externe" href="https://www.saatchiart.com/beawolff" target="_blank" rel="noopener">
+          <a class="carte-plateforme" href="https://www.saatchiart.com/beawolff" target="_blank" rel="noopener">
             <h4>Saatchi Art</h4>
             <p>Série Flower et autres œuvres disponibles à l'achat.</p>
           </a>
-          <a class="carte-plateforme orange lien-externe" href="https://www.riseart.com/fr/artiste/131362/beatrice-wolff" target="_blank" rel="noopener">
+          <a class="carte-plateforme" href="https://www.riseart.com/fr/artiste/131362/beatrice-wolff" target="_blank" rel="noopener">
             <h4>Rise Art</h4>
             <p>Collages et peintures sélectionnés par Rise Art.</p>
-          </a>
-          <a class="carte-plateforme bleu lien-externe" href="mailto:contact@beatricewolff.ch">
-            <h4>Commission sur mesure</h4>
-            <p>Une œuvre personnalisée : écrivez-moi directement.</p>
           </a>
         </div>
       </div>
@@ -582,21 +623,23 @@
     });
   });
 
-  // ----- Apparition douce au defilement -----
-  const observateur = new IntersectionObserver((entrees) => {
-    entrees.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible-defilement');
-        observateur.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.a-apparaitre').forEach(el => observateur.observe(el));
-  // Relance l'observation quand on revient sur la page galerie
-  liens.forEach(lien => lien.addEventListener('click', () => {
-    setTimeout(() => document.querySelectorAll('.a-apparaitre:not(.visible-defilement)')
-      .forEach(el => observateur.observe(el)), 50);
-  }));
+  // ----- Carrousels (un systeme pour toutes les series, fleches uniquement) -----
+  document.querySelectorAll('[data-carrousel]').forEach(carrousel => {
+    const piste = carrousel.querySelector('.piste');
+    const diapos = piste.children.length;
+    let index = 0;
+
+    function maj() {
+      piste.style.transform = 'translateX(-' + (index * 100) + '%)';
+    }
+    function allerA(i) { index = (i + diapos) % diapos; maj(); }
+
+    carrousel.querySelector('[data-precedent]').addEventListener('click', () => allerA(index - 1));
+    carrousel.querySelector('[data-suivant]').addEventListener('click', () => allerA(index + 1));
+
+    // Defilement automatique doux toutes les 6 secondes
+    setInterval(() => allerA(index + 1), 6000);
+  });
 
   // ----- Formulaire de contact -----
   // Pour recevoir les messages par e-mail, creez un compte Formspree (https://formspree.io)
